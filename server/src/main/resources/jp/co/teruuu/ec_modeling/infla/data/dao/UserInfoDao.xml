@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="jp.co.teruuu.ec_modeling.infla.data.dao.UserInfoDao">
+
+
+    <resultMap id="userInfo" type="jp.co.teruuu.ec_modeling.app.domain.user.model.UserInfo">
+        <result column="user_id" property="userId"/>
+        <result column="address" property="address"/>
+        <result column="postal_code" property="postalCode"/>
+    </resultMap>
+
+    <select id="findById" resultMap="userInfo" >
+        SELECT user_id, address, postal_code FROM user_info
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insert">
+        insert into user_info (user_id, address, postal_code) VALUES ( #{userId}, #{address}, #{postalCode})
+    </insert>
+
+</mapper>

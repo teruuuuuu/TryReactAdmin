@@ -1,0 +1,31 @@
+type ItemDetail {
+    itemId: ID!
+    name: String!
+    price: Int
+    number: Int
+    currentPrice: Int
+    description: String
+    updateDate: String
+}
+
+type OrderGraph {
+    orderId: ID!
+    userId: Int
+    orderStatus: Int
+    items: [ItemDetailGraph]
+}
+
+type ItemDetailGraph {
+    itemId: ID!
+    productId: Int
+    name: String
+    price: Int
+    number: Int
+    currentPrice: Int
+    description: String
+}
+
+type Query {
+    getItemDetail(itemId:ID!): ItemDetail
+    getOrder(orderId: ID!): OrderGraph
+}

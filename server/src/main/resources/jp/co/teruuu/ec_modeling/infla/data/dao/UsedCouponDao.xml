@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.teruuu.ec_modeling.infla.data.dao.UsedCouponDao">
+
+    <resultMap id="usedCoupon" type="jp.co.teruuu.ec_modeling.app.domain.order.model.UsedCoupon">
+        <result column="coupon_id" property="couponId"/>
+        <result column="discount" property="discount"/>
+    </resultMap>
+
+
+    <select id="findByOrderId" resultMap="usedCoupon" >
+        SELECT coupon_id, discount FROM used_coupon
+        where order_id = #{orderId}
+    </select>
+
+    <delete id="deleteByOrderId">
+        DELETE used_coupon where order_id = #{orderId}
+    </delete>
+
+    <insert id="insert">
+        INSERT INTO used_coupon (order_id, coupon_id, discount)
+        VALUES (#{orderId}, #{couponId}, #{discount})
+    </insert>
+
+</mapper>

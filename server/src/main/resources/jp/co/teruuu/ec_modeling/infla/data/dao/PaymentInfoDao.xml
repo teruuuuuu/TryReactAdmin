@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.teruuu.ec_modeling.infla.data.dao.PaymentInfoDao">
+
+    <resultMap id="paymentInfo" type="jp.co.teruuu.ec_modeling.app.domain.order.model.PaymentInfo">
+        <result column="payment_id" property="paymentId"/>
+        <result column="payment_type" property="paymentType"/>
+        <result column="is_payed" property="isPayed"/>
+        <result column="price" property="price"/>
+        <result column="due_date" property="due_date"/>
+        <result column="payment_date" property="payment_date"/>
+    </resultMap>
+
+    <select id="findByOrderId" resultMap="paymentInfo" >
+        SELECT payment_id, payment_type, is_payed, price, due_date, payment_date FROM payment_info
+        where order_id = #{orderId}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="paymentId">
+        INSERT INTO payment_info (order_id, payment_type, is_payed, price, due_date, payment_date)
+        VALUES ( #{orderId}, #{paymentType}, #{isPayed}, #{price}, #{dueDate}, #{paymentDate})
+    </insert>
+
+    <insert id="update" >
+        UPDATE payment_info
+        SET payment_type = #{paymentType}, is_payed = #{isPayed}, price = #{price}, du_date = #{dueDate}, payment_date = #{paymentDate}
+        WHERE payment_id = #{paymentId} and order_id = #{orderId}
+    </insert>
+
+</mapper>

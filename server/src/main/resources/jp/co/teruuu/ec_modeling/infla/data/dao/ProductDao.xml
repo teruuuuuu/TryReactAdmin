@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.teruuu.ec_modeling.infla.data.dao.ProductDao">
+
+    <resultMap id="product" type="jp.co.teruuu.ec_modeling.app.domain.product.model.Product">
+        <result column="product_id" property="productId"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+    </resultMap>
+
+    <select id="findById" resultMap="product" >
+        SELECT product_id, name, price FROM product
+        where product_id = #{productId}
+    </select>
+
+    <select id="search" resultMap="product" >
+        SELECT product_id, name, price FROM product
+        where name like #{name} limit #{limit} offset #{offset}
+    </select>
+
+    <insert id="insert" parameterType="jp.co.teruuu.ec_modeling.app.domain.product.model.Product"
+            useGeneratedKeys="true" keyProperty="productId">
+        INSERT INTO product (name, price) VALUES ( #{name}, #{price})
+    </insert>
+
+</mapper>

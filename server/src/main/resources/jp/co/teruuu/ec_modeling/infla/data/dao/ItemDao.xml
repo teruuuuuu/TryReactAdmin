@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.teruuu.ec_modeling.infla.data.dao.ItemDao">
+
+    <resultMap id="item" type="jp.co.teruuu.ec_modeling.app.domain.order.model.Item">
+        <result column="item_id" property="itemId"/>
+        <result column="product_id" property="productId"/>
+        <result column="price" property="price"/>
+        <result column="number" property="number"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+
+    <select id="findByOrderId" resultMap="item" >
+        SELECT item_id, product_id, price, number, update_date FROM item
+        where order_id = #{orderId}
+    </select>
+
+    <delete id="deleteByOrderId">
+        DELETE item where order_id = #{orderId}
+    </delete>
+
+    <delete id="deleteByOrderIdProductId">
+        DELETE item where order_id = #{orderId} and product_id = #{productId}
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="itemId">
+        INSERT INTO item (order_id, product_id, price, number, update_date)
+        VALUES ( #{orderId}, #{productId}, #{price}, #{number}, #{updateDate})
+    </insert>
+
+    <insert id="update">
+        UPDATE item SET price = #{price}, number = #{number}, update_date = #{updateDate}
+        WHERE item_id = #{itemId}
+    </insert>
+
+</mapper>
