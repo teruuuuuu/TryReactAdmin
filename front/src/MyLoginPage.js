@@ -2,39 +2,38 @@ import * as React from "react";
 import { useState } from "react";
 import { useLogin, useNotify, Notification, defaultTheme } from "react-admin";
 import { ThemeProvider } from "@material-ui/styles";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 
+let requested = false;
 const MyLoginPage = ({ theme }) => {
-  const [company, setCompany] = useState("");
-  const [group, setGroup] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const login = useLogin();
   const notify = useNotify();
+
   const submit = (e) => {
-    e.preventDefault();
-    // will call authProvider.login({ email, password })
-    login({ company, group, name, password }).catch(() =>
-      notify("Invalid email or password")
-    );
+    if (name.trim() == "" || password.trim() == "") {
+      notify("ユーザー名、パスワードの入力が必要です");
+    } else if (requested) {
+      notify("既にリクエスト中です");
+    } else {
+      e.preventDefault();
+      requested = true;
+      login({ name, password })
+        .then((res) => {
+          console.info(res);
+        })
+        .catch((e) => {
+          notify(e.message);
+        })
+        .finally(() => {
+          requested = false;
+        });
+    }
   };
 
   return (
-    <ThemeProvider theme={createMuiTheme(defaultTheme)}>
-      <input
-        name="name"
-        type="text"
-        value={company}
-        onChange={(e) => setCompany(e.target.value)}
-      />
-      <br />
-      <input
-        name="name"
-        type="text"
-        value={group}
-        onChange={(e) => setGroup(e.target.value)}
-      />
-      <br />
+    <ThemeProvider theme={theme}>
       <form onSubmit={submit}>
         <input
           name="name"

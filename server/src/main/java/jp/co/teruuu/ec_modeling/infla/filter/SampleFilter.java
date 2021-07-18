@@ -23,6 +23,8 @@ public class SampleFilter implements Filter {
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
           throws IOException, ServletException {
     System.out.println("Before");
+      HttpServletResponse httpServletResponse = ((HttpServletResponse)response);
+      httpServletResponse.setHeader("Access-Control-Expose-Headers", "X-Total-Count");
     chain.doFilter(request, response);
     System.out.println("After");
   }

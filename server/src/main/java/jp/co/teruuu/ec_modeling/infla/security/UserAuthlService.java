@@ -18,8 +18,7 @@ public class UserAuthlService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String[] param = username.split(",");
-        LoginUser user = loginUserDao.findByName(param[2]);
+        LoginUser user = loginUserDao.findByName(username);
         return new AuthUser(Optional.ofNullable(user));
     }
 

@@ -77,9 +77,9 @@ public class OrderInitService {
     List<OrderEntity> ret = new ArrayList<OrderEntity>();
     OrderEntity order1 = makeOrderEntity(user1);
     order1
-            .updateItem(product1.getProductId(), product1.getPrice(), 1)
-            .updateItem(product2.getProductId(), product2.getPrice(), 2)
-            .updateItem(product3.getProductId(), product3.getPrice(), 3)
+            .updateItem(product1.getProductId(), product1.getPrice(), 3)
+            .updateItem(product2.getProductId(), product2.getPrice(), 5)
+            .updateItem(product3.getProductId(), product3.getPrice(), 2)
             .addCoupon(new UsedCoupon(coupon1.getCouponId(), coupon1.getDiscount()))
             .confirm(PaymentType.Credit)
             .payComp();
@@ -87,9 +87,9 @@ public class OrderInitService {
 
     OrderEntity order2 = makeOrderEntity(user2);
     order2
-            .updateItem(product4.getProductId(), product4.getPrice(), 4)
+            .updateItem(product4.getProductId(), product4.getPrice(), 9)
             .updateItem(product5.getProductId(), product5.getPrice(), 5)
-            .updateItem(product6.getProductId(), product6.getPrice(), 6)
+            .updateItem(product6.getProductId(), product6.getPrice(), 2)
             .updateItem(product7.getProductId(), product7.getPrice(), 7)
             .addCoupon(new UsedCoupon(coupon2.getCouponId(), coupon2.getDiscount()))
             .confirm(PaymentType.Bank);

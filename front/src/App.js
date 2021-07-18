@@ -1,21 +1,29 @@
 import * as React from "react";
-import { Admin, Resource, ListGuesser } from "react-admin";
+import { fetchUtils, Admin, Resource, ListGuesser } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import authProvider from "./authProvider";
 import MyLoginPage from "./MyLoginPage";
 import MyLogoutButton from "./MyLogoutButton";
 import { PostList } from "./posts";
+import { ItemList, ItemCreate, ItemEdit } from "./items";
+import dataproviders from "./dataproviders";
+import { createTheme } from "@material-ui/core/styles";
 
-const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
 const App = () => (
   <Admin
     loginPage={MyLoginPage}
     logoutButton={MyLogoutButton}
-    dataProvider={dataProvider}
+    dataProvider={dataproviders}
     authProvider={authProvider}
+    theme={createTheme({})}
   >
-    <Resource name="posts" list={PostList} />
-    <Resource name="users" list={ListGuesser} />
+    <Resource
+      name="items"
+      options={{ label: "品目" }}
+      list={ItemList}
+      create={ItemCreate}
+      edit={ItemEdit}
+    />
   </Admin>
 );
 

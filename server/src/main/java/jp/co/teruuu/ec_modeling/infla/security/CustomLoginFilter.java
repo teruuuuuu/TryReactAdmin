@@ -30,10 +30,7 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
                     request.getReader().lines().collect(Collectors.joining()),
                     new TypeReference<Map<String, String>>() {
                     });
-            UsernamePasswordAuthenticationToken token
-                    = new UsernamePasswordAuthenticationToken(
-                    requestMap.get("company") + "," + requestMap.get("group") + "," + requestMap.get("name"),
-                    requestMap.get("password"));
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(requestMap.get("name"), requestMap.get("password"));
 
             // Allow subclasses to set the "details" property
             setDetails(request, token);

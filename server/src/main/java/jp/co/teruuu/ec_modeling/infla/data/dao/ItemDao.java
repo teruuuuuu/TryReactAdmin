@@ -4,8 +4,6 @@ import jp.co.teruuu.ec_modeling.app.domain.order.model.Item;
 import jp.co.teruuu.ec_modeling.app.domain.order.model.OrderId;
 import jp.co.teruuu.ec_modeling.app.domain.product.model.ProductId;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
